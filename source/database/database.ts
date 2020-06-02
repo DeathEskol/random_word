@@ -1,9 +1,10 @@
 // Imports
-import mongose, { ConnectionOptions } from 'mongoose'
-import * as dotenv from "dotenv"
+import mongose, { ConnectionOptions } from 'mongoose';
+import * as dotenv from 'dotenv';
+
+// Initializations
 dotenv.config();
 
-// Initialization
 const dbOptions: ConnectionOptions = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -11,15 +12,15 @@ const dbOptions: ConnectionOptions = {
 }
 
 // Main
-mongose.connect(<string>process.env.DATABASE_URI, dbOptions)
-
+mongose.connect(<string>process.env.DATABASE_URI, dbOptions);
+//mongose.connect(<string>process.env.DATABASE_URI || 'mongodb://localhost/random_word' , dbOptions);
 const connection = mongose.connection;
 
 connection.once('open', () => {
     console.log(`Connection stablished.`);
-})
+});
 
 connection.on('error', (error: any) => {
     console.log(error);
-    process.exit(0)
-})
+    process.exit(0);
+});

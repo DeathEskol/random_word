@@ -14,18 +14,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const dotenv = __importStar(require("dotenv"));
-dotenv.config();
+const word_1 = require("./controllers/word");
 // Initializations
 const server = express_1.default();
+dotenv.config();
 // Settings
 server.set('port', process.env.PORT);
+//server.set('port', process.env.PORT || 8000 );
 // Middlewares
 server.use(morgan_1.default('dev'));
 server.use(express_1.default.urlencoded({ extended: false }));
 server.use(express_1.default.json());
 // Routes
-server.get('/', (request, response) => {
-    response.send('Random Word Works!');
-});
+server.get('/', (request, response) => { response.send('Random Word Works!'); });
+server.get('/word', word_1.getWord);
+server.post('/word', word_1.postWord);
 // Export
 exports.default = server;

@@ -13,8 +13,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // Imports
 const mongoose_1 = __importDefault(require("mongoose"));
 const dotenv = __importStar(require("dotenv"));
+// Initializations
 dotenv.config();
-// Initialization
 const dbOptions = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -22,6 +22,7 @@ const dbOptions = {
 };
 // Main
 mongoose_1.default.connect(process.env.DATABASE_URI, dbOptions);
+//mongose.connect(<string>process.env.DATABASE_URI || 'mongodb://localhost/random_word' , dbOptions);
 const connection = mongoose_1.default.connection;
 connection.once('open', () => {
     console.log(`Connection stablished.`);
